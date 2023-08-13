@@ -1,9 +1,10 @@
-// To parse this JSON data, do
-//
-//     final characterModel = characterModelFromJson(jsonString);
-
 import 'dart:convert';
 
+/// A model class representing character data fetched from an external source.
+///
+/// This class defines the structure of character data and provides methods to convert
+/// data between JSON format and the model instance.
+///
 CharacterModel characterModelFromJson(String str) =>
     CharacterModel.fromJson(json.decode(str));
 

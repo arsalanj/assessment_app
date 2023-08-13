@@ -1,11 +1,15 @@
 import 'package:assessment_app/utilities/utilities.dart';
 import 'package:flutter/material.dart';
 
+/// Represents the screen that displays character details.
 class CharacterDetailScreen extends StatefulWidget {
   final String imageUrl;
   final String title;
 
-  CharacterDetailScreen({
+  /// Constructs a new instance of [CharacterDetailScreen].
+  ///
+  /// The [imageUrl] and [title] are required to display character information.
+  const CharacterDetailScreen({
     super.key,
     required this.imageUrl,
     required this.title,
@@ -18,16 +22,15 @@ class CharacterDetailScreen extends StatefulWidget {
 class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    // Determine whether the device is in portrait mode or not.
     bool isPortrait = Utilities.isTablet(context)
         ? true
         : MediaQuery.of(context).orientation == Orientation.portrait;
-    //  &&
-    //     !Utilities.isTablet(context);
 
-    // print(imageUrl);
     return Scaffold(
       appBar: AppBar(
         title: Text(
+          // Extract the first part of the title before the '-' and trim any whitespace.
           widget.title.split('-').first.trim(),
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -38,6 +41,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Choose the appropriate layout based on device orientation.
             isPortrait
                 ? _buildForPortrait(widget.imageUrl)
                 : _buildForLandscape(widget.imageUrl),
@@ -47,6 +51,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
     );
   }
 
+  /// Builds a network image widget.
   Widget buildNetworkImage(String imageUrl) {
     return KeyedSubtree(
       key: ValueKey<String>(imageUrl), // Use imageUrl as the key
@@ -61,6 +66,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
     );
   }
 
+  /// Builds the UI for portrait orientation.
   Widget _buildForPortrait(String imageUrl) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -75,6 +81,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
     );
   }
 
+  /// Builds the title widget.
   Text buildTitle() {
     return Text(
       widget.title,
@@ -82,6 +89,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
     );
   }
 
+  /// Builds the UI for landscape orientation.
   Widget _buildForLandscape(String imageUrl) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
