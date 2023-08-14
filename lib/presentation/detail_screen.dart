@@ -57,6 +57,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
       key: ValueKey<String>(imageUrl), // Use imageUrl as the key
       child: FadeInImage.assetNetwork(
         placeholder: 'assets/images/loading.gif',
+        placeholderFit: BoxFit.fill,
         image: imageUrl,
         fit: BoxFit.fill,
         imageErrorBuilder: (context, error, stackTrace) {
@@ -96,7 +97,10 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
       children: [
         Flexible(
           // flex: 1,
-          child: buildNetworkImage(imageUrl),
+          child: Container(
+            height: MediaQuery.of(context).size.width / 3,
+            child: buildNetworkImage(imageUrl),
+          ),
         ),
         const SizedBox(width: 20),
         // Spacer(),
